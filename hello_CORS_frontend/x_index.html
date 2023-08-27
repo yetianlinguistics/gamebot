@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <button id="btn">Click me</button>
+    <p id="response"></p>
+
+    <script>
+    $(document).ready(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                url: "http://localhost:5000/get_chat_response",
+                type: "POST",
+                data: JSON.stringify({text: "Hello Server"}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                    $("#response").html(data.response);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
