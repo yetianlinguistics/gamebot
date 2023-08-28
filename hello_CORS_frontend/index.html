@@ -3,6 +3,7 @@
 <head>
     <title>Hello World</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="referrer" content="no-referrer-when-downgrade">
 </head>
 <body>
     <h1>Hello World</h1>
@@ -12,16 +13,30 @@
     <script>
     $(document).ready(function(){
         $("#btn").click(function(){
+            // $.ajax({
+            //     url: "http://localhost:15007/get_chat_response",
+            //     type: "POST",
+            //     data: JSON.stringify({text: "Hello Server"}),
+            //     contentType: "application/json; charset=utf-8",
+            //     dataType: "json",
+            //     success: function(data){
+            //         $("#response").html(data.response);
+            //     }
+            // });
             $.ajax({
-                url: "http://localhost:5000/get_chat_response",
+                url: "http://localhost:15007/get_chat_response",
                 type: "POST",
                 data: JSON.stringify({text: "Hello Server"}),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function(data){
                     $("#response").html(data.response);
                 }
             });
+
         });
     });
     </script>
